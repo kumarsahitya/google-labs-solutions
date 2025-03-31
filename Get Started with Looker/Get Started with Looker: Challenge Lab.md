@@ -1,16 +1,14 @@
-# 👨‍💻 Lab Link: [Get Started with Looker: Challenge Lab](https://www.cloudskillsboost.google/course_templates/647/labs/461643)
+# 👨‍💻 Lab Link: [Get Started with Looker: Challenge Lab - ARC107](https://www.cloudskillsboost.google/course_templates/647/labs/461643)
 
 
 ## Task 1. Create a new report in Looker Studio
 
 1. Create a new [Looker Studio](http://lookerstudio.google.com/) report named **Online Sales**, and connect to **Public datasets** > **<mark>\<filled in at lab start></mark>** > **thelook_ecommerce** > **orders**.
-
 2. Add a time series chart using any theme and title of your choice.
 
 ## Task 2. Create a new view in Looker
 
 1. Create a new view named **users_region** with the following specifications:
-
 2. Copy and Paste below code in **editor** and click **save change**.
 
 ```
@@ -41,9 +39,7 @@ view: users_region {
 ```
 
 3. In the file browser, under the models folder, navigate to the ```training_ecommerce.model``` file.
-
 4. Clear existing code from **editor**.
-
 5. Copy and Paste below code in **editor** and click **save change**.
 
 ```
@@ -119,19 +115,13 @@ explore: events {
 2. Add a commit message and click **Commit**.
 3. Lastly, click **Deploy to Production**.
 
-<<<<<<< HEAD
 ## Task 3. Create a new dashboard in Looker
-=======
-### Task 3. Create a new dashboard in Looker
->>>>>>> 3ef699b64f45ed0890cb9f7bde300b52966f2123
 
 1. Use your new view named **users_region** to create a bar chart of the **top 3 event types based on the highest number of users**.
-
 2. Customize your bar chart using any colors and labels of your choice.
-
 3. Save your bar chart to a new dashboard named **User Events**.
 
-## Now check the score.
+## Congratulations, you've completed the lab! 😄 Now, go ahead and check your score.
 
 ---
 

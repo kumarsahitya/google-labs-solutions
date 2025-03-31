@@ -1,4 +1,5 @@
-# 👨‍💻 Lab Link: [Looker Developer: Qwik Start](https://www.cloudskillsboost.google/course_templates/647/labs/461642)
+# 👨‍💻 Lab Link: [Looker Developer: Qwik Start - GSP891](https://www.cloudskillsboost.google/course_templates/647/labs/461642)
+
 
 ## Task 1. Create a view
 
@@ -6,15 +7,10 @@
 
 ![Alt text](https://cdn.qwiklabs.com/uUCbNuedSCOYQmL%2BIubjqvusmGAeS7Wjj3f6xByL174%3D)
 
-
 2. Click the **Develop** tab and then select the ```qwiklabs-ecommerce``` LookML project.
-
 3. To create the file at the project’s root level, click the **+** button at the top of the file browser in the Looker IDE.
-
 4. Select **Create View**. Name the file users_limited. Click **Create**.
-
 5. Copy and Paste below code in **editor** and click **save change**.
-
 
 ```
 view: users_limited {
@@ -55,9 +51,7 @@ view: users_limited {
 ## Task 2. Join a view to an existing Explore
 
 1. In the file browser, under the models folder, navigate to the ```training_ecommerce.model``` file.
-
 2. Clear existing code from **editor**.
-
 3. Copy and Paste below code in **editor** and click **save change**.
 
 ```
@@ -134,7 +128,7 @@ explore: events {
 2. Add a commit message and click **Commit**.
 3. Lastly, click **Deploy to Production**.
 
-## Now check the score.
+## Congratulations, you've completed the lab! 😄 Now, go ahead and check your score.
 
 ---
 
