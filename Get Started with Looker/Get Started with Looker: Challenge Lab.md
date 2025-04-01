@@ -119,7 +119,11 @@ explore: events {
 2. Add a commit message and click **Commit**.
 3. Lastly, click **Deploy to Production**.
 
+<<<<<<< HEAD
 ## Task 3. Create a new dashboard in Looker
+=======
+### Task 3. Create a new dashboard in Looker
+>>>>>>> 3ef699b64f45ed0890cb9f7bde300b52966f2123
 
 1. Use your new view named **users_region** to create a bar chart of the **top 3 event types based on the highest number of users**.
 
