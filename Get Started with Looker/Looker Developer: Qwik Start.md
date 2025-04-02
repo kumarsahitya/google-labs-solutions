@@ -1,8 +1,6 @@
+# 👨‍💻 Lab Link: [Looker Developer: Qwik Start](https://www.cloudskillsboost.google/course_templates/647/labs/461642)
 
-# Looker Developer: Qwik Start
-
-
-### Task 1. Create a view
+## Task 1. Create a view
 
 1. First, on the bottom left of the Looker User Interface, click the toggle button to enter <strong>Development mode</strong>.
 
@@ -15,7 +13,7 @@
 
 4. Select **Create View**. Name the file users_limited. Click **Create**.
 
-5. Copy and Paste below code in **editor** and click **save**.
+5. Copy and Paste below code in **editor** and click **save change**.
 
 
 ```
@@ -54,14 +52,13 @@ view: users_limited {
   }
 ```
 
-
-### Task 2. Join a view to an existing Explore
+## Task 2. Join a view to an existing Explore
 
 1. In the file browser, under the models folder, navigate to the ```training_ecommerce.model``` file.
 
 2. Clear existing code from **editor**.
 
-3. Copy and Paste below code in **editor** and click **save**.
+3. Copy and Paste below code in **editor** and click **save change**.
 
 ```
 connection: "bigquery_public_data_looker"
@@ -86,8 +83,6 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
-
-
 
   join: inventory_items {
     type: left_outer
@@ -139,5 +134,12 @@ explore: events {
 2. Add a commit message and click **Commit**.
 3. Lastly, click **Deploy to Production**.
 
+## Now check the score.
 
-### Now check the score.
+---
+
+## ⚖️ NOTE: Copyright by Google Cloud
+* This script is not originally from this page. It has been edited and shared for educational purposes. Message me if you want credit or removal (no copyright intended). All rights and credits for the original content go to Google Cloud. 📜✍️💡
+* Credit goes to the respective owner [Google Cloud Skill Boost website](https://www.cloudskillsboost.google/). 🙏👑
+
+---
