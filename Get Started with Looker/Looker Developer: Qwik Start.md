@@ -1,6 +1,4 @@
-
 # Looker Developer: Qwik Start
-
 
 ### Task 1. Create a view
 
@@ -15,7 +13,7 @@
 
 4. Select **Create View**. Name the file users_limited. Click **Create**.
 
-5. Copy and Paste below code in **editor** and click **save**.
+5. Copy and Paste below code in **editor** and click **save change**.
 
 
 ```
@@ -54,14 +52,13 @@ view: users_limited {
   }
 ```
 
-
 ### Task 2. Join a view to an existing Explore
 
 1. In the file browser, under the models folder, navigate to the ```training_ecommerce.model``` file.
 
 2. Clear existing code from **editor**.
 
-3. Copy and Paste below code in **editor** and click **save**.
+3. Copy and Paste below code in **editor** and click **save change**.
 
 ```
 connection: "bigquery_public_data_looker"
@@ -138,6 +135,5 @@ explore: events {
 1. Click **Validate LookML** and then click **Commit Changes & Push**.
 2. Add a commit message and click **Commit**.
 3. Lastly, click **Deploy to Production**.
-
 
 ### Now check the score.
