@@ -1,5 +1,6 @@
 
 
+
 export REGION="${ZONE%-*}"
 
 export PROJECT_ID=$(gcloud config get-value project)
@@ -15,11 +16,6 @@ gcloud services enable \
   containerscanning.googleapis.com \
   ondemandscanning.googleapis.com \
   binaryauthorization.googleapis.com 
-
-
-
-sleep 75
-
 
 gcloud artifacts repositories create artifact-scanning-repo \
   --repository-format=docker \
@@ -46,6 +42,7 @@ CMD exec gunicorn --bind :\$PORT --workers 1 --threads 8 main:app
 
 EOF
 
+
 cat > ./main.py << EOF
 import os
 from flask import Flask
@@ -62,23 +59,7 @@ if __name__ == "__main__":
 EOF
 
 
-
-#!/bin/bash
-
-while true; do
-    gcloud builds submit . -t $REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image
-
-    #   # Submit the build
-    if [ $? -eq 0 ]; then
-        echo "Build submission successful. please like and subscribe to techcps (https://www.youtube.com/@techcps)."
-        break
-    else
-        echo "Error: Submit the build is processing. (https://www.youtube.com/@techcps)."
-    fi
-    sleep 30
-done
-
-
+gcloud builds submit . -t $REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image
 
 cat > ./vulnz_note.json << EOM
 {
@@ -90,6 +71,7 @@ cat > ./vulnz_note.json << EOM
 }
 EOM
 
+
 NOTE_ID=vulnz_note
 
 curl -vvv -X POST \
@@ -98,10 +80,10 @@ curl -vvv -X POST \
     --data-binary @./vulnz_note.json  \
     "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/?noteId=${NOTE_ID}"
 
+
 curl -vvv  \
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
     "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/${NOTE_ID}"
-
 
 ATTESTOR_ID=vulnz-attestor
 
@@ -109,9 +91,7 @@ gcloud container binauthz attestors create $ATTESTOR_ID \
     --attestation-authority-note=$NOTE_ID \
     --attestation-authority-note-project=${PROJECT_ID}
 
-
 gcloud container binauthz attestors list
-
 
 PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}"  --format="value(projectNumber)")
 
@@ -134,14 +114,11 @@ cat > ./iam_request.json << EOM
 }
 EOM
 
-
 curl -X POST  \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
     --data-binary @./iam_request.json \
     "https://containeranalysis.googleapis.com/v1/projects/${PROJECT_ID}/notes/${NOTE_ID}:setIamPolicy"
-
-
 
 KEY_LOCATION=global
 KEYRING=binauthz-keys
@@ -155,7 +132,6 @@ gcloud kms keys create "${KEY_NAME}" \
     --purpose asymmetric-signing   \
     --default-algorithm="ec-sign-p256-sha256"
 
-
 gcloud beta container binauthz attestors public-keys add  \
     --attestor="${ATTESTOR_ID}"  \
     --keyversion-project="${PROJECT_ID}"  \
@@ -164,16 +140,12 @@ gcloud beta container binauthz attestors public-keys add  \
     --keyversion-key="${KEY_NAME}" \
     --keyversion="${KEY_VERSION}"
 
-
 gcloud container binauthz attestors list
-
 
 CONTAINER_PATH=$REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image
 
 DIGEST=$(gcloud container images describe ${CONTAINER_PATH}:latest \
     --format='get(image_summary.digest)')
-
-
 
 gcloud beta container binauthz attestations sign-and-create  \
     --artifact-url="${CONTAINER_PATH}@${DIGEST}" \
@@ -189,13 +161,9 @@ gcloud beta container binauthz attestations sign-and-create  \
 gcloud container binauthz attestations list \
    --attestor=$ATTESTOR_ID --attestor-project=${PROJECT_ID}
 
-
 gcloud beta container clusters create binauthz \
     --zone $ZONE  \
     --binauthz-evaluation-mode=PROJECT_SINGLETON_POLICY_ENFORCE
-
-
-
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
@@ -203,16 +171,7 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 
 gcloud container binauthz policy export
 
-
 kubectl run hello-server --image gcr.io/google-samples/hello-app:1.0 --port 8080
-
-kubectl get pods
-
-sleep 5
-
-kubectl get pods
-
-sleep 5
 
 kubectl get pods
 
@@ -220,41 +179,27 @@ kubectl delete pod hello-server
 
 gcloud container binauthz policy export  > policy.yaml
 
-
-cat > policy.yaml <<EOF_CP
+cat > policy.yaml <<EOF
 globalPolicyEvaluationMode: ENABLE
 defaultAdmissionRule:
   evaluationMode: ALWAYS_DENY
   enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
-name: projects/$PROJECT_ID/policy
-EOF_CP
-
-gcloud container binauthz policy export > policy.yaml
-
-cat > policy.yaml  <<EOF_CP
-globalPolicyEvaluationMode: ENABLE
-defaultAdmissionRule:
-  evaluationMode: ALWAYS_DENY
-  enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
-name: projects/$PROJECT_ID/policy
-EOF_CP
-
+name: projects/$DEVSHELL_PROJECT_ID/policy
+EOF
 
 gcloud container binauthz policy import policy.yaml
 
 kubectl run hello-server --image gcr.io/google-samples/hello-app:1.0 --port 8080
 
-cat > policy.yaml <<EOF_CP
+cat > policy.yaml <<EOF
 globalPolicyEvaluationMode: ENABLE
 defaultAdmissionRule:
   evaluationMode: ALWAYS_ALLOW
   enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
-name: projects/$PROJECT_ID/policy
-EOF_CP
-
+name: projects/$DEVSHELL_PROJECT_ID/policy
+EOF
 
 gcloud container binauthz policy import policy.yaml
-
 
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
@@ -265,12 +210,9 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
   --member serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
   --role roles/cloudkms.signerVerifier
 
-
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
   --member serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
   --role roles/containeranalysis.notes.attacher
-
-
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
@@ -329,24 +271,7 @@ images:
 EOF
 
 
-
-
-#!/bin/bash
-
-while true; do
-    gcloud builds submit --project=$PROJECT_ID
-
-    #   # Submit the build
-    if [ $? -eq 0 ]; then
-        echo "Build submission successful. please like and subscribe to techcps (https://www.youtube.com/@techcps)."
-        break
-    else
-        echo "Error: Submit the build is processing. (https://www.youtube.com/@techcps)."
-    fi
-    sleep 60
-done
-
-
+gcloud builds submit
 
 
 COMPUTE_ZONE=$REGION
@@ -369,12 +294,10 @@ EOM
 
 gcloud beta container binauthz policy import binauth_policy.yaml
 
-
 CONTAINER_PATH=$REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image
 
 DIGEST=$(gcloud container images describe ${CONTAINER_PATH}:good \
     --format='get(image_summary.digest)')
-
 
 cat > deploy.yaml << EOM
 apiVersion: v1
@@ -421,22 +344,12 @@ kubectl apply -f deploy.yaml
 
 docker build -t $REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image:bad .
 
-
 docker push $REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image:bad
-
-
-
-
-docker push $REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image:bad
-
 
 CONTAINER_PATH=$REGION-docker.pkg.dev/${PROJECT_ID}/artifact-scanning-repo/sample-image
 
-
 DIGEST=$(gcloud container images describe ${CONTAINER_PATH}:bad \
     --format='get(image_summary.digest)')
-
-
 
 cat > deploy.yaml << EOM
 apiVersion: v1
@@ -475,7 +388,5 @@ spec:
             value: "8080"
 
 EOM
-
-
 
 kubectl apply -f deploy.yaml
