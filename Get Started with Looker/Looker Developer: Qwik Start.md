@@ -8,7 +8,7 @@
 ![Alt text](https://cdn.qwiklabs.com/uUCbNuedSCOYQmL%2BIubjqvusmGAeS7Wjj3f6xByL174%3D)
 
 2. Click the **Develop** tab and then select the ```qwiklabs-ecommerce``` LookML project.
-3. To create the file at the project’s root level, click the **+** button at the top of the file browser in the Looker IDE.
+3. To create the file at the project's root level, click the **+** button at the top of the file browser in the Looker IDE.
 4. Select **Create View**. Name the file users_limited. Click **Create**.
 5. Copy and Paste below code in **editor** and click **save change**.
 
