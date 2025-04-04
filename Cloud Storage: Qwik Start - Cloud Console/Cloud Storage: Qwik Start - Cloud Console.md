@@ -4,8 +4,7 @@
 
 ```
 export REGION=
-```
-```
+
 curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/Cloud%20Storage%3A%20Qwik%20Start%20-%20Cloud%20Console/gsp073.sh
 sudo chmod +x gsp073.sh
 ./gsp073.sh

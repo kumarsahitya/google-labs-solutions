@@ -5,9 +5,7 @@
 
 ```
 export SHARED_ID=
-```
 
-```
 curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/Consuming%20Customer%20Specific%20Datasets%20from%20Data%20Sharing%20Partners%20using%20BigQuery/gsp1043s.sh
 sudo chmod +x gsp1043s.sh
 ./gsp1043s.sh
@@ -17,9 +15,7 @@ sudo chmod +x gsp1043s.sh
 
 ```
 export PUBLISHER_ID=
-```
 
-```
 curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/Consuming%20Customer%20Specific%20Datasets%20from%20Data%20Sharing%20Partners%20using%20BigQuery/gsp1043p.sh
 sudo chmod +x gsp1043p.sh
 ./gsp1043p.sh

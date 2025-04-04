@@ -4,9 +4,7 @@
 
 ```
 export REGION=
-```
 
-```
 curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/Deploy%20Go%20Apps%20on%20Google%20Cloud%20Serverless%20Platforms/gsp702.sh
 sudo chmod +x gsp702.sh
 ./gsp702.sh

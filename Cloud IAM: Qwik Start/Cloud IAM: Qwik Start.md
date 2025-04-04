@@ -3,6 +3,8 @@
 ## Copy and run the below commands in Cloud Shell:
 
 ```
+export USER_2=student-03-cf449a630cec@qwiklabs.net
+
 curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/Cloud%20IAM%3A%20Qwik%20Start/gsp064.sh
 sudo chmod +x gsp064.sh
 ./gsp064.sh

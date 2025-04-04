@@ -4,9 +4,7 @@
 
 ```
 export REGION=
-```
 
-```
 curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/App%20Engine%3A%20Qwik%20Start%20-%20Go/gsp070.sh
 sudo chmod +x gsp070.sh
 ./gsp070.sh
