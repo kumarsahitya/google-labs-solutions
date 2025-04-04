@@ -1,11 +1,11 @@
-# 👨‍💻 Lab Link: [HTTP Google Cloud Run Functions in Go - GSP602](https://www.cloudskillsboost.google/games/6064/labs/38619)
+# 👨‍💻 Lab Link: [Cloud Monitoring: Qwik Start - GSP089](https://www.cloudskillsboost.google/games/6058/labs/38570)
 
 ## Copy and run the below commands in Cloud Shell:
 
 ```
-curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/HTTP%20Google%20Cloud%20Run%20Functions%20in%20Go/gsp602.sh
-sudo chmod +x gsp602.sh
-./gsp602.sh
+curl -LO raw.githubusercontent.com/kumarsahitya/google-labs-solutions/master/Cloud%20Monitoring%3A%20Qwik%20Start/gsp089.sh
+sudo chmod +x gsp089.sh
+./gsp089.sh
 ```
 
 
